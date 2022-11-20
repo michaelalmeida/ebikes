@@ -2,25 +2,59 @@
 
 ### User
 
-`POST /login`
-`POST /signup`
-`GET user/basicinfo`
-`PATCH /user/rent` isLoggedIn
+| Protocol | Endpoint          | Require login |
+| -------- | ----------------- | ------------- |
+| POST     | `/login`          | no            |
+| POST     | `/signup`         | no            |
+| GET      | `/user/basicinfo` | no            |
+| PATCH    | `/user/rent`      | yes           |
+| PATCH    | `/user/return`    | yes           |
 
 ### Bike
 
-`GET /bike`
-`POST /bike` isLoggedIn
-`GET /bike/:id`
-`GET /bike/last/:quantity`
-`PATCH /bike/rent` isLoggedIn
-`PATCH /bike/return` isLoggedIn
+| Protocol | Endpoint               | Require login |
+| -------- | ---------------------- | ------------- |
+| GET      | `/bike`                | no            |
+| POST     | `/bike`                | no            |
+| GET      | `/bike/:id`            | no            |
+| GET      | `/bike/last/:quantity` | no            |
+| POST     | `/bike/rent`           | yes           |
+| POST     | `/bike/return`         | yes           |
 
-### Examples
+## Examples
 
 #### Create bike - POST: /bike
 
-• body expected:
+Body expected:
+
+## Endpoints
+
+### User
+
+| Protocol | Endpoint          | Require login |
+| -------- | ----------------- | ------------- |
+| POST     | `/login`          | no            |
+| POST     | `/signup`         | no            |
+| GET      | `/user/basicinfo` | no            |
+| PATCH    | `/user/rent`      | yes           |
+| PATCH    | `/user/return`    | yes           |
+
+### Bike
+
+| Protocol | Endpoint               | Require login |
+| -------- | ---------------------- | ------------- |
+| GET      | `/bike`                | no            |
+| POST     | `/bike`                | no            |
+| GET      | `/bike/:id`            | no            |
+| GET      | `/bike/last/:quantity` | no            |
+| POST     | `/bike/rent`           | yes           |
+| POST     | `/bike/return`         | yes           |
+
+## Examples
+
+#### Create bike - POST: /bike
+
+Body expected:
 
 ```json
 {
