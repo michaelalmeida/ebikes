@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { BLACK, MAIN_COLOR, WHITE } from './Constants/colors';
+import { BACKGROUND, BLACK, MAIN_COLOR } from './Constants/colors';
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -12,8 +12,9 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     color: ${BLACK};
-    background: ${WHITE};
+    background: ${BACKGROUND};
     font-family: 'Inter', sans-serif;
+    font-size: 16px;
   }
 
   a {
