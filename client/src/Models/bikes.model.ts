@@ -1,9 +1,9 @@
 export interface IBikes {
-    id: string;
+    _id: string;
     name: string;
     location: {
-        latitude: string;
-        longitude: string;
+        latitude: number;
+        longitude: number;
     };
     rented: boolean;
     description: {

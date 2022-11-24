@@ -43,7 +43,7 @@ Body expected:
 
 | Protocol | Endpoint               | Require login |
 | -------- | ---------------------- | ------------- |
-| GET      | `/bike`                | no            |
+| GET      | `/bikes`               | no            |
 | POST     | `/bike`                | no            |
 | GET      | `/bike/:id`            | no            |
 | GET      | `/bike/last/:quantity` | no            |

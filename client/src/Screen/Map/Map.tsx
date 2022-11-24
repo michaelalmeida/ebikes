@@ -1,9 +1,15 @@
 import { MapWrapper } from './Map.style';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { MAP_SCROLL_WHEEL, MAP_ZOOM } from './constant';
+import { IBikes } from '../../Models/bikes.model';
+import { Loading } from '../../Components/Loading';
 
-export const Map = () => {
-    return (
+interface MapProps {
+    bikes?: IBikes[];
+}
+
+export const Map = ({ bikes }: MapProps) => {
+    return bikes ? (
         <MapWrapper>
             <MapContainer
                 center={[51.505, -0.09]}
@@ -13,12 +19,19 @@ export const Map = () => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={[51.505, -0.09]}>
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                </Marker>
+                {bikes.map((bike) => (
+                    <Marker
+                        position={[bike.location.latitude, bike.location.longitude]}
+                        key={bike._id}>
+                        <Popup>
+                            {bike.name}
+                            {bike.rented ? 'This bike is already rented' : 'This bike is for rent'}
+                        </Popup>
+                    </Marker>
+                ))}
             </MapContainer>
         </MapWrapper>
+    ) : (
+        <Loading />
     );
 };

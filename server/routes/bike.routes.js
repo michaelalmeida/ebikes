@@ -3,7 +3,7 @@ var express = require("express");
 var bike_controller = require("../controllers/bike.controller.js");
 
 module.exports = function (app) {
-  app.get("/bike", bike_controller.listAllBikes);
+  app.get("/bikes", bike_controller.listAllBikes);
 
   app.post("/bike", bike_controller.createBike);
 
