@@ -1,1 +1,3 @@
-export const Home = () => <p>Home</p>;
+import { Map } from '../Map';
+
+export const Home = () => <Map />;
