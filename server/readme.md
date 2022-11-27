@@ -69,3 +69,17 @@ Body expected:
   }
 }
 ```
+
+#### Create user - POST: /signup
+
+```json
+{
+  "name": "Michael Almeida",
+  "username": "michaelalmeida",
+  "password": "123",
+  "language": "EN",
+  "country": "Germany",
+  "city": "Cologne",
+  "email": "michaelralmeida@gmail.com"
+}
+```

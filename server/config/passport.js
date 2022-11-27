@@ -54,7 +54,7 @@ module.exports = function (passport) {
         passReqToCallback: true,
       },
       function (req, username, password, done) {
-        const { name, email, language, country } = req.body;
+        const { name, email, language, country, city } = req.body;
         process.nextTick(function () {
           User.findOne({ username: username }, function (err, existingUser) {
             if (err) return done(err);

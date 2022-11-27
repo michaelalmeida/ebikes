@@ -27,9 +27,14 @@ module.exports = function (app, passport) {
     });
   });
 
-  app.get("/logout", function (req, res) {
-    req.logout();
-    res.status(202).send("Logout").end();
+  app.post("/logout", function (req, res, next) {
+    req.logout(function (err) {
+      if (err) {
+        return next(err);
+      }
+      //res.redirect('/');
+      res.status(202).send("Logout").end();
+    });
   });
 
   app.get("/login", function (req, res) {
