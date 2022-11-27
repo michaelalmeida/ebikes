@@ -1,12 +1,13 @@
 import { Header } from '../../Components/Header';
+import { Content, PublicLayoutWrapper } from './PublicLayout.style';
 
 interface PublicLayoutProps {
     children: JSX.Element;
 }
 
 export const PublicLayout = ({ children }: PublicLayoutProps) => (
-    <>
+    <PublicLayoutWrapper>
         <Header />
-        {children}
-    </>
+        <Content>{children}</Content>
+    </PublicLayoutWrapper>
 );

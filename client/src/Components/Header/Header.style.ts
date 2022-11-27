@@ -12,3 +12,12 @@ export const HeaderWrapper = styled.header`
     background: ${WHITE};
     flex-direction: column;
 `;
+
+export const Menu = styled.div`
+    display: flex;
+    width: 100%;
+    padding: 10px 0;
+    box-sizing: border-box;
+    flex-grow: 1;
+    justify-content: end;
+`;

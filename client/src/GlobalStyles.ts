@@ -22,18 +22,7 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none
   }
 
-  button {
-    border: 4px solid ${MAIN_COLOR};
-    background: transparent;
-    padding: 5px 20px;
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: 14px;
-    cursor: pointer;
-    @media screen and (max-width: 800px) {
-      padding: 5px;
-  }
-}
+
 `;
 
 export default GlobalStyle;

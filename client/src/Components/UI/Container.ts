@@ -6,8 +6,10 @@ export const Container = styled.div`
     display: flex;
     width: ${MAX_WIDTH};
     box-sizing: border-box;
+    align-items: center;
 
     @media (max-width: 1024px) {
+        padding: 0 20px;
         width: ${FULL};
     }
 `;

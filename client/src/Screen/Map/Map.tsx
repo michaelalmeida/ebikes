@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { MAP_SCROLL_WHEEL, MAP_ZOOM } from './constant';
 import { IBikes } from '../../Models/bikes.model';
 import { Loading } from '../../Components/Loading';
+import { Bike } from '../../Components/Bike';
 
 interface MapProps {
     bikes?: IBikes[];
@@ -12,7 +13,7 @@ export const Map = ({ bikes }: MapProps) => {
     return bikes ? (
         <MapWrapper>
             <MapContainer
-                center={[51.505, -0.09]}
+                center={[50.90895, 6.941593170166016]}
                 zoom={MAP_ZOOM}
                 scrollWheelZoom={MAP_SCROLL_WHEEL}>
                 <TileLayer
@@ -24,8 +25,7 @@ export const Map = ({ bikes }: MapProps) => {
                         position={[bike.location.latitude, bike.location.longitude]}
                         key={bike._id}>
                         <Popup>
-                            {bike.name}
-                            {bike.rented ? 'This bike is already rented' : 'This bike is for rent'}
+                            <Bike bike={bike} />
                         </Popup>
                     </Marker>
                 ))}

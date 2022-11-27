@@ -3,7 +3,11 @@ import { getBikes } from '../../api/service';
 import { IBikes } from '../../Models/bikes.model';
 
 export const useBikes = () => {
-    const { isLoading, data, isError } = useQuery<IBikes[], Error>(['bikes'], getBikes);
+    const { isLoading, data, isError } = useQuery<IBikes[], Error>(['bikes'], getBikes, {
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
+        refetchOnMount: false,
+    });
 
     return {
         bikes: data,
