@@ -13,3 +13,8 @@ export const Container = styled.div`
         width: ${FULL};
     }
 `;
+
+export const RightContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+`;

@@ -1,7 +1,7 @@
-import { useContext, useEffect } from 'react';
-import { IUser, UserLogin } from '../../Models/user.model';
+import { useCallback, useContext, useEffect } from 'react';
+import { UserLogin } from '../../Models/user.model';
 import { useMutation } from '@tanstack/react-query';
-import { postLogout, postLogin } from '../../api/service';
+import { userLogout, userLogin } from '../../api/service';
 import { UserContext } from '../useUser/useUser';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../Constants/routes';
@@ -19,36 +19,37 @@ export const useUserLogin = () => {
         isSuccess: fetchUserIsSuccess,
     } = useMutation(
         ['login'],
-        async ({ username, password }: UserLogin) => await postLogin({ username, password })
+        async ({ username, password }: UserLogin) => await userLogin({ username, password })
     );
 
     const { mutate: logoutUser, isSuccess: logoutUserIsSuccess } = useMutation(
         ['logout'],
-        postLogout
+        userLogout
     );
 
-    const saveUserInfo = (user: IUser) => {
-        addUser(user);
-
-        userCookie.name = user.name;
-        userCookie.userId = user._id;
-        userCookie.userName = user.username;
-        userCookie.userLanguage = user.language;
-    };
+    const saveUserInfo = useCallback(() => {
+        if (userData) {
+            addUser(userData);
+            userCookie.name = userData.name;
+            userCookie.userId = userData._id;
+            userCookie.userName = userData.username;
+            userCookie.userLanguage = userData.language;
+        }
+    }, [userData, addUser]);
 
     useEffect(() => {
         if (!user.username && fetchUserIsSuccess) {
-            saveUserInfo(userData);
+            saveUserInfo();
             navigate(ROUTES.HOME);
         }
-    }, [user.username, fetchUserIsSuccess]);
+    }, [user.username, fetchUserIsSuccess, navigate, saveUserInfo]);
 
     useEffect(() => {
         if (logoutUserIsSuccess) {
             userCookie.cleanCookies();
             clearUserContext();
         }
-    }, [logoutUserIsSuccess]);
+    }, [logoutUserIsSuccess, clearUserContext]);
 
     return { fetchUser, fetchUserIsLoading, fetchUserIsError, logoutUser };
 };

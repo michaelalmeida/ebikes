@@ -1,5 +1,6 @@
 import { createContext, useState, useContext } from 'react';
 import { IUser } from '../../Models/user.model';
+import userCookie from '../../Helpers/userCookie';
 
 export type UserContextState = {
     user: IUser;
@@ -50,8 +51,18 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
 export const useUser = () => {
     const { user, addUser } = useContext(UserContext);
 
+    const userBasicInfo = {
+        username: userCookie.userName,
+        name: userCookie.name,
+        id: userCookie.userId,
+        language: userCookie.userLanguage,
+    };
+
+    console.log(userBasicInfo);
+
     return {
         user,
         addUser,
+        userBasicInfo,
     };
 };

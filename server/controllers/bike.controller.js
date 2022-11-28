@@ -52,9 +52,9 @@ exports.listAllBikes = function (req, res) {
 };
 
 exports.rentBike = function (req, res) {
-  const bike = mongoose.Types.ObjectId(req.body.bike);
+  const bikeId = mongoose.Types.ObjectId(req.body.bikeId);
   const userId = mongoose.Types.ObjectId(req.body.userId);
-  const username = mongoose.Types.ObjectId(req.body.username);
+  const username = req.body.username;
 
   Bike.findOne(
     {
@@ -71,7 +71,7 @@ exports.rentBike = function (req, res) {
   );
 
   Bike.findByIdAndUpdate(
-    bike,
+    bikeId,
     { rented: true, rentedBy: userId, username: username },
     {
       new: true,
@@ -83,6 +83,7 @@ exports.rentBike = function (req, res) {
           .send("Impossivel to add" + err)
           .end();
       } else {
+        res.header("Access-Control-Allow-Origin", "*");
         res.status(200).send("Bike rented!!").end();
       }
     }

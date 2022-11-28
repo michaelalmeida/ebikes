@@ -5,11 +5,12 @@ import { H2 } from '../UI/Typography';
 import { HeaderWrapper, Menu } from './Header.style';
 import { Button } from '../UI/Button';
 import { ROUTES } from '../../Constants/routes';
-import userCookie from '../../Helpers/userCookie';
 import { useUserLogin } from '../../Hooks/useUserLogin/useUserLogin';
+import { useUser } from '../../Hooks/useUser/useUser';
 
 export const Header = () => {
     const { logoutUser } = useUserLogin();
+    const { userBasicInfo } = useUser();
 
     return (
         <HeaderWrapper>
@@ -18,9 +19,9 @@ export const Header = () => {
                     <H2>eBike</H2>
                 </Link>
                 <Menu>
-                    {userCookie.userName ? (
+                    {userBasicInfo.username ? (
                         <span>
-                            Welcome {userCookie.userName},{' '}
+                            Welcome {userBasicInfo.username},{' '}
                             <Button onClick={() => logoutUser()}>Logout</Button>
                         </span>
                     ) : (
