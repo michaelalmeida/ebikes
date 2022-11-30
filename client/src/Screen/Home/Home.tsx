@@ -10,11 +10,10 @@ export const Home = () => {
     const { fetchUserData, userBasicInfo } = useUser();
 
     useEffect(() => {
-        console.log('userBasicInfo', userBasicInfo);
         if (userBasicInfo.id) {
             fetchUserData(userBasicInfo.id);
         }
-    }, []);
+    }, [userBasicInfo.id]);
 
     if (fetchBikesIsError) {
         return <p>There is no bike available, I'll try to load again in few seconds</p>;

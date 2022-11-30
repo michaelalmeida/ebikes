@@ -10,7 +10,7 @@ export type UserContextState = {
     clearUserContext: () => void;
 };
 
-const initialUserValues = {
+export const initialUserValues = {
     _id: '',
     name: '',
     username: '',

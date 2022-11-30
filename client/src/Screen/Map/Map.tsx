@@ -23,13 +23,11 @@ export const Map = ({ bikes }: MapProps) => {
     const { user } = useUser();
     const { rentBikeHandler, bike: selectedBike } = useBike();
 
-    console.log('selectedBike', selectedBike);
-
     return bikes ? (
         <MapWrapper>
-            {user.renting && (
+            {user.renting && selectedBike._id && (
                 <CardWrapper>
-                    <H4>Renting</H4>
+                    <H4>You are renting:</H4>
                     <p>{selectedBike.name}</p>
                     <Button
                         marginTop

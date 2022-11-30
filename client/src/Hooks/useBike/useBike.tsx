@@ -55,7 +55,7 @@ export const BikeProvider = ({ children }: { children: JSX.Element }) => {
 export const useBike = () => {
     const { userBasicInfo } = useUser();
     const { fetchRentBike, fetchReturnBike } = useBikes();
-    const { bike, addBike, clearBikeContext } = useContext(BikeContext);
+    const { bike, clearBikeContext } = useContext(BikeContext);
 
     const rentBikeHandler = (bikeId: string, isRented: boolean, rentedBy: string) => {
         if (!userBasicInfo.username) {

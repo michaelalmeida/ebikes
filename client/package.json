@@ -54,5 +54,10 @@
     "devDependencies": {
         "@types/leaflet": "1.7.11",
         "eslint": "^8.28.0"
+    },
+    "jest": {
+        "moduleNameMapper": {
+            "axios": "axios/dist/node/axios.cjs"
+        }
     }
 }
