@@ -20,6 +20,7 @@ export const useBikes = () => {
         refetchOnWindowFocus: false,
         refetchOnReconnect: false,
         refetchOnMount: false,
+        retry: 10,
     });
 
     const {
