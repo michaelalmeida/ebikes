@@ -32,7 +32,6 @@ module.exports = function (app, passport) {
       if (err) {
         return next(err);
       }
-      //res.redirect('/');
       res.status(202).send("Logout").end();
     });
   });
@@ -75,11 +74,7 @@ module.exports = function (app, passport) {
     })(req, res, next);
   });
 
-  app.get("/user/basicinfo", user_controller.getUserBasicInfo);
-
-  app.patch("/user/rent", isLoggedIn, user_controller.rentBike);
-
-  // app.patch("/user/return", isLoggedIn, user_controller.finishRental);
+  app.get("/user/info/:userId", user_controller.getUserInfo);
 };
 
 function isLoggedIn(req, res, next) {

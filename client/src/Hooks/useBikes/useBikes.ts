@@ -3,8 +3,14 @@ import { getBikes, rentBike, returnBike } from '../../api/service';
 import { RentBike, ReturnBike } from '../../Models/bike.model';
 import { IBikes } from '../../Models/bikes.model';
 import { toast } from 'react-toastify';
+import { useUser } from '../useUser/useUser';
+import { BikeContext } from '../useBike/useBike';
+import { useContext } from 'react';
 
 export const useBikes = () => {
+    const { setUser, user } = useUser();
+    const { addBike, clearBikeContext } = useContext(BikeContext);
+
     const {
         isLoading: fetchBikesIsLoading,
         data: bikes,
@@ -26,11 +32,13 @@ export const useBikes = () => {
         async ({ username, userId, bikeId }: RentBike) =>
             await rentBike({ username, userId, bikeId }),
         {
-            onSuccess: () => {
+            onSuccess: (newBike: IBikes) => {
                 toast.success('You rented the bike!', {
                     position: toast.POSITION.TOP_CENTER,
                 });
 
+                setUser({ ...user, renting: true });
+                addBike(newBike);
                 refetchBikes();
             },
             onError: () =>
@@ -49,6 +57,8 @@ export const useBikes = () => {
                     position: toast.POSITION.TOP_CENTER,
                 });
 
+                setUser({ ...user, renting: false });
+                clearBikeContext();
                 refetchBikes();
             },
             onError: () =>

@@ -5,45 +5,15 @@ exports.home = function (req, res) {
   res.send("Hello World!");
 };
 
-exports.getUserBasicInfo = function (req, res) {
-  User.find(
-    {
-      _id: mongoose.Types.ObjectId(req.body.id),
-    },
-    "country city renting email language"
-  )
-    .sort({ creationDate: -1 })
-    .exec(function (err, data) {
+exports.getUserInfo = function (req, res) {
+  User.findById(
+    mongoose.Types.ObjectId(req.params.userId),
+    "_id username country city renting email language rental renting date",
+    function (err, user) {
       if (err) {
-        res
-          .status(404)
-          .send("Not found" + err)
-          .end();
+        res.status(404).send("Not found").end();
       }
-      res.json(data);
-    });
-};
-
-exports.finishRental = function (req, res) {
-  const userId = mongoose.Types.ObjectId(req.body.userId);
-
-  User.findByIdAndUpdate(
-    userId,
-    {
-      renting: false,
-    },
-    {
-      new: true,
-    },
-    function (err, bike) {
-      if (err || bike === null) {
-        res
-          .status(404)
-          .send("Impossible to register the return" + err)
-          .end();
-      } else {
-        res.status(200).send("Bike return registered!!").end();
-      }
+      res.json(user);
     }
   );
 };

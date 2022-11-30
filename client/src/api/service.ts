@@ -6,6 +6,9 @@ import { IUser, UserLogin } from '../Models/user.model';
 export const getBikes = (): Promise<IBikes[]> =>
     axios.get(`${process.env.REACT_APP_API_BASE_URL}/bikes`).then((res) => res.data);
 
+export const getUser = (userId: string): Promise<IUser> =>
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/user/info/${userId}`).then((res) => res.data);
+
 export const userLogin = ({ password, username }: UserLogin): Promise<IUser> =>
     axios
         .post(`${process.env.REACT_APP_API_BASE_URL}/login`, {
@@ -17,12 +20,14 @@ export const userLogin = ({ password, username }: UserLogin): Promise<IUser> =>
 export const userLogout = (): Promise<[]> =>
     axios.post(`${process.env.REACT_APP_API_BASE_URL}/logout`).then((res) => res.data);
 
-export const rentBike = ({ bikeId, userId, username }: RentBike) =>
-    axios.patch(`${process.env.REACT_APP_API_BASE_URL}/bike/rent`, {
-        bikeId,
-        userId,
-        username,
-    });
+export const rentBike = ({ bikeId, userId, username }: RentBike): Promise<IBikes> =>
+    axios
+        .patch(`${process.env.REACT_APP_API_BASE_URL}/bike/rent`, {
+            bikeId,
+            userId,
+            username,
+        })
+        .then((res) => res.data);
 
 export const returnBike = ({ bikeId, userId }: ReturnBike) =>
     axios.patch(`${process.env.REACT_APP_API_BASE_URL}/bike/return`, {

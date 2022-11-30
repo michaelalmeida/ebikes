@@ -3,7 +3,7 @@ import { Button } from '../UI/Button';
 import { RightContainer } from '../UI/Container';
 import { H2, H4 } from '../UI/Typography';
 import { BikeWrapper } from './Bike.style';
-import { useBike } from './useBike';
+import { useBike } from '../../Hooks/useBike/useBike';
 
 export const Bike = ({ bike }: { bike: IBikes }) => {
     const { rentBikeHandler } = useBike();

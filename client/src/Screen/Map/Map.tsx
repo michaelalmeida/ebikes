@@ -9,15 +9,35 @@ import L from 'leaflet';
 
 import normalPin from '../../assets/Icon/marker-icon-2x.png';
 import grayPin from '../../assets/Icon/gray_marker-icon-2x.png';
+import { useUser } from '../../Hooks/useUser/useUser';
+import { CardWrapper } from '../../Components/Card/Card.style';
+import { H4 } from '../../Components/UI/Typography';
+import { Button } from '../../Components/UI/Button';
+import { useBike } from '../../Hooks/useBike/useBike';
 
 interface MapProps {
     bikes?: IBikes[];
 }
 
 export const Map = ({ bikes }: MapProps) => {
-    console.log(' map rendered ');
+    const { user } = useUser();
+    const { rentBikeHandler, bike: selectedBike } = useBike();
+
+    console.log('selectedBike', selectedBike);
+
     return bikes ? (
         <MapWrapper>
+            {user.renting && (
+                <CardWrapper>
+                    <H4>Renting</H4>
+                    <p>{selectedBike.name}</p>
+                    <Button
+                        marginTop
+                        onClick={() => rentBikeHandler(selectedBike._id, true, user._id)}>
+                        Return
+                    </Button>
+                </CardWrapper>
+            )}
             <MapContainer
                 center={[50.90895, 6.941593170166016]}
                 zoom={MAP_ZOOM}

@@ -9,7 +9,7 @@ import userCookie from '../../Helpers/userCookie';
 import { toast } from 'react-toastify';
 
 export const useUserLogin = () => {
-    const { user, addUser, clearUserContext } = useContext(UserContext);
+    const { user, setUser, clearUserContext } = useContext(UserContext);
     const navigate = useNavigate();
 
     const {
@@ -38,13 +38,13 @@ export const useUserLogin = () => {
 
     const saveUserInfo = useCallback(() => {
         if (userData) {
-            addUser(userData);
+            setUser(userData);
             userCookie.name = userData.name;
             userCookie.userId = userData._id;
             userCookie.userName = userData.username;
             userCookie.userLanguage = userData.language;
         }
-    }, [userData, addUser]);
+    }, [userData, setUser]);
 
     useEffect(() => {
         if (!user.username && fetchUserIsSuccess) {

@@ -1,10 +1,12 @@
 import { createContext, useState, useContext } from 'react';
 import { IUser } from '../../Models/user.model';
 import userCookie from '../../Helpers/userCookie';
+import { useMutation } from '@tanstack/react-query';
+import { getUser } from '../../api/service';
 
 export type UserContextState = {
     user: IUser;
-    addUser: (user: IUser) => void;
+    setUser: (user: IUser) => void;
     clearUserContext: () => void;
 };
 
@@ -23,7 +25,7 @@ const initialUserValues = {
 
 const contextDefaultValues: UserContextState = {
     user: initialUserValues,
-    addUser: () => {},
+    setUser: () => {},
     clearUserContext: () => {},
 };
 
@@ -32,14 +34,14 @@ export const UserContext = createContext<UserContextState>(contextDefaultValues)
 export const UserProvider = ({ children }: { children: JSX.Element }) => {
     const [userInfo, setUserInfo] = useState<IUser>(contextDefaultValues.user);
 
-    const addUser = (newUser: IUser) => setUserInfo(newUser);
+    const setUser = (newUser: IUser) => setUserInfo(newUser);
 
     const clearUserContext = () => setUserInfo(initialUserValues);
 
     return (
         <UserContext.Provider
             value={{
-                addUser,
+                setUser,
                 user: userInfo,
                 clearUserContext,
             }}>
@@ -49,7 +51,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
 };
 
 export const useUser = () => {
-    const { user, addUser } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
     const userBasicInfo = {
         username: userCookie.userName,
@@ -58,9 +60,16 @@ export const useUser = () => {
         language: userCookie.userLanguage,
     };
 
+    const { mutate: fetchUserData } = useMutation(async (userId: string) => await getUser(userId), {
+        onSuccess: (data) => {
+            setUser(data);
+        },
+    });
+
     return {
         user,
-        addUser,
+        setUser,
         userBasicInfo,
+        fetchUserData,
     };
 };

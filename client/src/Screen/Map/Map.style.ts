@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const MapWrapper = styled.div`
+    position: relative;
     overflow: hidden;
-    height: 100vh;
+    height: calc(100vh - 80px);
     width: 100%;
 
     .leaflet-container {
