@@ -23,6 +23,11 @@ System to rent and return bike
 | RTL              | JavaScript Testing utility for React                  |
 | Jest             | JavaScript Testing Framework                          |
 
+## Env
+
+Node version: v19.0.0
+Npm version: 8.19.2
+
 ## Installation
 
 Clone the repository
