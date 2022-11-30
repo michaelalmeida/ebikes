@@ -1,59 +1,45 @@
-import React, { useState } from 'react';
 import { Button } from '../../Components/UI/Button';
-import { useUserLogin } from '../../Hooks/useUserLogin/useUserLogin';
+import { Input, Label } from '../../Components/UI/Form';
+import { H2 } from '../../Components/UI/Typography';
+import { FIELD_NAMES } from './constant';
 import { LoginBox, LoginBoxInfo, LoginForm } from './Login.style';
+import { useLogin } from './useLogin';
 
 export const Login = () => {
-    const { fetchUser } = useUserLogin();
-
-    const FIELD_NAMES = {
-        username: 'username',
-        password: 'password',
-    };
-
-    const [loginData, setLoginData] = useState({
-        username: '',
-        password: '',
-    });
-
-    const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setLoginData({ ...loginData, [e.target.name]: e.target.value });
-    };
-
-    const loginHandler = () => {
-        if (Object.values(loginData).includes('')) {
-            return;
-        }
-
-        fetchUser(loginData);
-    };
-
+    const { loginData, inputHandler, handleKeyPress, loginHandler } = useLogin();
     return (
         <LoginBox>
             <LoginForm>
                 <div>
-                    <label htmlFor={FIELD_NAMES.username}>Username:</label>
-                    <input
+                    <Label htmlFor={FIELD_NAMES.username}>*Username:</Label>
+                    <Input
                         type="text"
                         id={FIELD_NAMES.username}
                         name={FIELD_NAMES.username}
                         value={loginData.username}
                         onChange={inputHandler}
+                        onKeyDown={handleKeyPress}
                     />
                 </div>
                 <div>
-                    <label htmlFor={FIELD_NAMES.password}>Password:</label>
-                    <input
+                    <Label htmlFor={FIELD_NAMES.password}>*Password:</Label>
+                    <Input
                         type={FIELD_NAMES.password}
                         id={FIELD_NAMES.password}
                         name={FIELD_NAMES.password}
                         value={loginData.password}
                         onChange={inputHandler}
+                        onKeyDown={handleKeyPress}
                     />
                 </div>
-                <Button onClick={() => loginHandler()}>Login</Button>
+                <Button onClick={() => loginHandler()} marginTop>
+                    Login
+                </Button>
             </LoginForm>
-            <LoginBoxInfo>TEste</LoginBoxInfo>
+            <LoginBoxInfo>
+                <H2>Welcome!</H2>
+                <p>* Required fields</p>
+            </LoginBoxInfo>
         </LoginBox>
     );
 };

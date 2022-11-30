@@ -58,8 +58,6 @@ export const useUser = () => {
         language: userCookie.userLanguage,
     };
 
-    console.log(userBasicInfo);
-
     return {
         user,
         addUser,

@@ -3,3 +3,8 @@ export interface RentBike {
     userId: string;
     username: string;
 }
+
+export interface ReturnBike {
+    bikeId: string;
+    userId: string;
+}

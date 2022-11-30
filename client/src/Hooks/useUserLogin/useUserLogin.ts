@@ -6,6 +6,7 @@ import { UserContext } from '../useUser/useUser';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../Constants/routes';
 import userCookie from '../../Helpers/userCookie';
+import { toast } from 'react-toastify';
 
 export const useUserLogin = () => {
     const { user, addUser, clearUserContext } = useContext(UserContext);
@@ -19,13 +20,21 @@ export const useUserLogin = () => {
         isSuccess: fetchUserIsSuccess,
     } = useMutation(
         ['login'],
-        async ({ username, password }: UserLogin) => await userLogin({ username, password })
+        async ({ username, password }: UserLogin) => await userLogin({ username, password }),
+        {
+            onError: () =>
+                toast.error('Wrong username or password', {
+                    position: toast.POSITION.TOP_CENTER,
+                }),
+        }
     );
 
-    const { mutate: logoutUser, isSuccess: logoutUserIsSuccess } = useMutation(
-        ['logout'],
-        userLogout
-    );
+    const { mutate: logoutUser } = useMutation(['logout'], userLogout, {
+        onSuccess: () => {
+            userCookie.cleanCookies();
+            clearUserContext();
+        },
+    });
 
     const saveUserInfo = useCallback(() => {
         if (userData) {
@@ -43,13 +52,6 @@ export const useUserLogin = () => {
             navigate(ROUTES.HOME);
         }
     }, [user.username, fetchUserIsSuccess, navigate, saveUserInfo]);
-
-    useEffect(() => {
-        if (logoutUserIsSuccess) {
-            userCookie.cleanCookies();
-            clearUserContext();
-        }
-    }, [logoutUserIsSuccess, clearUserContext]);
 
     return { fetchUser, fetchUserIsLoading, fetchUserIsError, logoutUser };
 };

@@ -27,4 +27,6 @@ export const LoginBoxInfo = styled.div`
     flex-direction: column;
     justify-content: space-between;
     background: ${MAIN_COLOR};
+    flex-basis: 200px;
+    color: ${WHITE};
 `;

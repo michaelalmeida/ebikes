@@ -21,7 +21,7 @@ export const Header = () => {
                 <Menu>
                     {userBasicInfo.username ? (
                         <span>
-                            Welcome {userBasicInfo.username},{' '}
+                            Welcome {userBasicInfo.name}{' '}
                             <Button onClick={() => logoutUser()}>Logout</Button>
                         </span>
                     ) : (

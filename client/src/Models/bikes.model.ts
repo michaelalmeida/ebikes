@@ -10,4 +10,5 @@ export interface IBikes {
         year: number;
         color: string;
     };
+    rentedBy: string;
 }

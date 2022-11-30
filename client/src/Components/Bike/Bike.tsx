@@ -24,8 +24,11 @@ export const Bike = ({ bike }: { bike: IBikes }) => {
                 </div>
             )}
             <RightContainer>
-                <Button variant="big" onClick={() => rentBikeHandler(bike._id)}>
-                    Rent Bicycle
+                <Button
+                    variant="big"
+                    onClick={() => rentBikeHandler(bike._id, bike.rented, bike.rentedBy)}
+                    marginTop>
+                    {bike.rented ? 'Return Bicycle' : ' Rent Bicycle'}
                 </Button>
             </RightContainer>
         </BikeWrapper>

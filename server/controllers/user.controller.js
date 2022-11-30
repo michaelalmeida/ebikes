@@ -24,17 +24,14 @@ exports.getUserBasicInfo = function (req, res) {
     });
 };
 
-exports.rentBike = function (req, res) {
-  const bikeId = mongoose.Types.ObjectId(req.body.bike);
+exports.finishRental = function (req, res) {
   const userId = mongoose.Types.ObjectId(req.body.userId);
 
   User.findByIdAndUpdate(
     userId,
     {
-      renting: true,
+      renting: false,
     },
-    { $inc: { rental: 1 } },
-    { $push: { rented: bikeId } },
     {
       new: true,
     },
@@ -42,35 +39,11 @@ exports.rentBike = function (req, res) {
       if (err || bike === null) {
         res
           .status(404)
-          .send("Impossible to register the rental" + err)
+          .send("Impossible to register the return" + err)
           .end();
       } else {
-        res.status(200).send("Bike registered!!").end();
+        res.status(200).send("Bike return registered!!").end();
       }
     }
   );
-
-  exports.finishRental = function (req, res) {
-    const userId = mongoose.Types.ObjectId(req.body.userId);
-
-    User.findByIdAndUpdate(
-      userId,
-      {
-        renting: false,
-      },
-      {
-        new: true,
-      },
-      function (err, bike) {
-        if (err || bike === null) {
-          res
-            .status(404)
-            .send("Impossible to register the return" + err)
-            .end();
-        } else {
-          res.status(200).send("Bike return registered!!").end();
-        }
-      }
-    );
-  };
 };

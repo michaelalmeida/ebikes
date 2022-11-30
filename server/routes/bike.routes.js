@@ -7,9 +7,9 @@ module.exports = function (app) {
 
   app.post("/bike", bike_controller.createBike);
 
-  app.patch("/bike/rent", isLoggedIn, bike_controller.rentBike);
+  app.patch("/bike/rent", bike_controller.rentBike);
 
-  app.patch("/bike/return", isLoggedIn, bike_controller.returnBike);
+  app.patch("/bike/return", bike_controller.returnBike);
 
   app.get("/bike/:id", bike_controller.readBike);
 
