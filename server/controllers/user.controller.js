@@ -1,10 +1,6 @@
 var User = require("../models/user.model");
 var mongoose = require("mongoose");
 
-exports.home = function (req, res) {
-  res.send("Hello World!");
-};
-
 exports.getUserInfo = function (req, res) {
   User.findById(
     mongoose.Types.ObjectId(req.params.userId),

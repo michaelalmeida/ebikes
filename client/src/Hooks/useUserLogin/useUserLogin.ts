@@ -20,7 +20,7 @@ export const useUserLogin = () => {
         isSuccess: fetchUserIsSuccess,
     } = useMutation(
         ['login'],
-        async ({ username, password }: UserLogin) => await userLogin({ username, password }),
+        ({ username, password }: UserLogin) => userLogin({ username, password }),
         {
             onError: () =>
                 toast.error('Wrong username or password', {

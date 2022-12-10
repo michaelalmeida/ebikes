@@ -60,7 +60,7 @@ export const useUser = () => {
         language: userCookie.userLanguage,
     };
 
-    const { mutate: fetchUserData } = useMutation(async (userId: string) => await getUser(userId), {
+    const { mutate: fetchUserData } = useMutation((userId: string) => getUser(userId), {
         onSuccess: (data) => {
             setUser(data);
         },

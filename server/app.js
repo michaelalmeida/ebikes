@@ -53,8 +53,4 @@ app.use(function (req, res, next) {
 require("./routes/user.routes")(app, passport);
 require("./routes/bike.routes")(app, passport);
 
-// app.listen(process.env.PORT, () => {
-//   console.log("Server is up and running on port numner " + process.env.PORT);
-// });
-
 module.exports = app;

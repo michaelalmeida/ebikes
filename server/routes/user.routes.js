@@ -13,8 +13,6 @@ router.use(function (req, res, next) {
 });
 
 module.exports = function (app, passport) {
-  app.get("/", user_controller.home);
-
   app.get("/profile", isLoggedIn, function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(

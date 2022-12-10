@@ -30,8 +30,7 @@ export const useBikes = () => {
         isSuccess: fetchRentBikeIsSuccess,
     } = useMutation(
         ['rentBike'],
-        async ({ username, userId, bikeId }: RentBike) =>
-            await rentBike({ username, userId, bikeId }),
+        ({ username, userId, bikeId }: RentBike) => rentBike({ username, userId, bikeId }),
         {
             onSuccess: (newBike: IBikes) => {
                 toast.success('You rented the bike!', {
@@ -51,7 +50,7 @@ export const useBikes = () => {
 
     const { mutate: fetchReturnBike } = useMutation(
         ['returnBike'],
-        async ({ userId, bikeId }: ReturnBike) => await returnBike({ userId, bikeId }),
+        ({ userId, bikeId }: ReturnBike) => returnBike({ userId, bikeId }),
         {
             onSuccess: () => {
                 toast.success('You returned the bike!', {
