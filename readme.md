@@ -66,3 +66,7 @@ Then you can execute the same command in the /client folder to run the app in th
 | `start`        | Serves your app at `localhost:3000` |
 | `build`        | Builds the application              |
 | `test`         | Runs unit tests                     |
+
+Login for test:
+admin2
+admin2
